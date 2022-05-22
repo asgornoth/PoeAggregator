@@ -228,7 +228,44 @@ function dView(result, searchInfo)
 		overrides['account-profile'] = buildAccountLink(result.listing.account.name);
 	}
 	overrides['whisper-button'] = buildCopyButton(whisperButtonText, result.listing.whisper);
-	overrides['whisper-to-poe-button'] = buildCopyButton('↩', result.listing.whisper, true);	
+	overrides['whisper-to-poe-button'] = buildCopyButton('↩', result.listing.whisper, true);
+
+	/*
+	
+	meu adendo
+	
+	*/
+				let stackSize = result.item.stackSize;
+				let mensagem = result.listing.whisper;
+				if(result.listing.price.amount && stackSize > 1) {
+					let precoQuantidade = result.listing.price.amount;
+					let precoTotal = stackSize * precoQuantidade;
+					//let currencyType = result.listing.price.currency;
+					currencyType = currencyType[0].toUpperCase() + currencyType.slice(1);
+					let itemName = result.item.baseType;
+					let isEnglish = result.listing.whisper.includes('I would like to buy your');
+
+					if (isEnglish)
+					{
+						let acctName = result.listing.account.lastCharacterName;
+						let msg = `@${acctName} Hi, I'd like to buy your ${stackSize} ${itemName} for my ${precoTotal} ${currencyType} Orb in ${league}.`;
+						mensagem = msg;
+					}
+					else
+					{
+						let separator = ' ********** ';
+
+						let msg = `WTB ${stackSize} ${itemName} for  ${precoTotal} ${currencyType} `;
+
+						mensagem = msg;
+					}
+				}
+
+				let multiWhisperButtonText = `x ` + stackSize;
+
+
+
+	overrides['multiquant-whisper-button'] = buildCopyButton(multiWhisperButtonText, mensagem);
 	overrides['item.corrupted'] = '';
 	overrides['item.mirrored'] = '';
 	overrides['search-comment'] = '';

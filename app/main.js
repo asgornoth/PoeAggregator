@@ -10,7 +10,7 @@ var overlayHeights = new Map();
 var MIN_TRADE_WIDTH = 400;
 var MIN_TRADE_HEIGHT = 200;
 var COLLAPSED_TRADE_HEIGHT = 40;
-var isDebug = false;
+var isDebug = true;
 var poesessionid = null;
 
 function getPoesessionid()
